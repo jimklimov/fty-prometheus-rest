@@ -1,0 +1,108 @@
+<#
+#Copyright (C) 2018 Eaton.
+#
+#>
+<%pre>
+#include "tntmlm.h"
+#include <fty_proto.h>
+
+//out <label>{device="<device-id>"} <value>
+static
+void s_rt_dump_metrics(const char*label, const char* name, const char*filter,MlmClientPool::Ptr &client,tnt::HttpReply& reply)
+{
+    static const char* method = "GET";
+    zmsg_t *msg = zmsg_new ();
+    zuuid_t *uuid = zuuid_new ();
+    zmsg_addstr (msg, zuuid_str_canonical (uuid));
+    zmsg_addstr (msg, method);
+    zmsg_addstr (msg, name);
+    if(filter!=NULL)
+        zmsg_addstr (msg, filter);
+    
+    int rv = client->sendto ("fty-metric-cache", "latest-rt-data", 1000, &msg);
+    if (rv == -1) {
+        zuuid_destroy (&uuid);
+        printf (
+                "client->sendto (address = '%s', subject = '%s', timeout = 1000) failed.",
+                "fty-metric-cache", "latest-rt-data");
+        return ;
+    }
+
+    msg = client->recv (zuuid_str_canonical (uuid), 5);
+    zuuid_destroy (&uuid);
+    if (!msg) {
+        printf ("client->recv (timeout = '5') returned NULL");
+        return ;
+    }
+
+    char *result = zmsg_popstr (msg);
+    if (NULL==result || !streq (result, "OK")) {
+        printf ("Error reply for device '%s', result=%s", name, (result==NULL)?"NULL":result);
+        if(result!=NULL)
+            zstr_free (&result);
+        zmsg_destroy (&msg);
+        return ;
+    }
+    char *element = zmsg_popstr (msg);
+    if (!streq (element, name)) {
+        printf ("element name (%s) from message differs from requested one (%s), ignoring", element,name);
+        zstr_free (&element);
+        zmsg_destroy (&msg);
+        return ;
+    }
+    zstr_free (&element);
+
+    if(msg==NULL)
+        return;
+    zmsg_t *data = zmsg_popmsg (msg);
+    while (data) {
+        fty_proto_t *bmsg = fty_proto_decode (&data);
+        if (!bmsg) {
+            printf ("decoding fty_proto_t failed");
+            zmsg_destroy (&msg);
+            return;
+        }
+
+        // TODO: non double values are not (yet) supported
+        double dvalue = 0.0;
+        try {
+            dvalue = std::stod (fty_proto_value (bmsg));
+        } catch (const std::exception& e) {
+            printf ("fty_proto_value () returned a string that does not encode a double value: '%s'. Defaulting to 0.0 value.", fty_proto_value (bmsg));
+        }
+        reply.out() << label;
+        reply.out() << "{ device=\"";
+        reply.out() << fty_proto_name(bmsg);
+        reply.out() << "\"} ";
+        reply.out() << dvalue;
+        reply.out() << "\n";
+        fty_proto_destroy (&bmsg);
+        data = zmsg_popmsg (msg);
+    }
+    zmsg_destroy (&msg);
+}
+</%pre>
+<%cpp>
+    // connect to malamute
+    MlmClientPool::Ptr client = mlm_pool.get ();
+    if (!client.getPointer ()) {
+        printf ("mlm_pool.get () failed.");
+        return HTTP_INTERNAL_SERVER_ERROR;
+    }
+</%cpp>
+# HELP ipm_realpower_watt current realpower 
+# TYPE ipm_realpower_watt gauge
+<%cpp>
+   s_rt_dump_metrics("ipm_realpower_watt",".*","realpower.default$",client,reply);
+</%cpp>
+# HELP ipm_temperature_celsius current ambiant temperature 
+# TYPE ipm_temperature_celsius gauge
+<%cpp>
+   s_rt_dump_metrics("ipm_temperature_celsius",".*","average.temperature$|average.temperature-input$|temperature.cpu$",client,reply);
+</%cpp>
+# HELP ipm_humidity_percent current ambiant temperature 
+# TYPE ipm_humidity_percent gauge
+<%cpp>
+   s_rt_dump_metrics("ipm_humidity_percent",".*","average.humidity$|average.humidity-input$",client,reply);
+</%cpp>
+

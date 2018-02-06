@@ -1,0 +1,34 @@
+ECPPC=ecppc
+ECPPFLAGS=
+ECPPFLAGS_CPP=
+
+ECPPFILES= \
+  metrics.ecpp 
+
+TNTLIB_BASENAME=libfty_prometheus_rest
+TNTLIB_DIRNAME=$(prefix)/lib/bios
+
+ECPPCCFILES = $(ECPPFILES:.ecpp=.cc)
+
+EXTRA_DIST += $(addprefix src/,$(ECPPFILES))
+
+project_libs += -ltntnet
+
+.ecpp.cc:
+	${ECPPC} ${ECPPFLAGS} ${ECPPFLAGS_CPP} -o $(top_builddir)/src/$(@F) $(top_srcdir)/src/$(<F) && \
+	    mv -f $(top_builddir)/src/$(@F).cpp $(top_builddir)/src/$(@F)
+
+clean-local:
+	for file in $(ECPPCCFILES); do \
+	    /bin/rm -f $(top_builddir)/src/$$file; \
+	done
+
+uninstall-local:
+	/bin/rm -f $(DESTDIR)$(TNTLIB_DIRNAME)/$(TNTLIB_BASENAME).so*
+
+install-exec-hook:
+	mkdir -p $(DESTDIR)$(TNTLIB_DIRNAME) && \
+	    mv -f $(DESTDIR)$(libdir)/$(TNTLIB_BASENAME).so.* $(DESTDIR)$(TNTLIB_DIRNAME)
+	cd $(DESTDIR)$(TNTLIB_DIRNAME) && \
+	    ln -fs "`ls -1 $(TNTLIB_BASENAME).so.* | tail -1`" $(TNTLIB_BASENAME).so
+
