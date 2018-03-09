@@ -26,7 +26,7 @@ case "$CI_TRACE" in
 esac
 
 case "$BUILD_TYPE" in
-default|default-Werror|default-with-docs|valgrind)
+default|default-Werror|default-with-docs|valgrind|clang-format-check)
     LANG=C
     LC_ALL=C
     export LANG LC_ALL
@@ -418,13 +418,25 @@ default|default-Werror|default-with-docs|valgrind)
     CONFIG_OPTS+=("${CONFIG_OPT_WERROR}")
     $CI_TIME ./autogen.sh 2> /dev/null
     $CI_TIME ./configure --enable-drafts=yes "${CONFIG_OPTS[@]}"
-    if [ "$BUILD_TYPE" == "valgrind" ] ; then
-        # Build and check this project
-        $CI_TIME make VERBOSE=1 memcheck && exit
-        echo "Re-running failed ($?) memcheck with greater verbosity" >&2
-        $CI_TIME make VERBOSE=1 memcheck-verbose
-        exit $?
-    fi
+    case "$BUILD_TYPE" in
+        valgrind)
+            # Build and check this project
+            $CI_TIME make VERBOSE=1 memcheck && exit
+            echo "Re-running failed ($?) memcheck with greater verbosity" >&2
+            $CI_TIME make VERBOSE=1 memcheck-verbose
+            exit $?
+            ;;
+        clang-format-check)
+            RES=0
+            $CI_TIME make VERBOSE=1 clang-format-check || {
+                RES=$?
+                echo "" >&2
+                echo "Style mismatches were found by clang-format; detailing below:" >&2
+                $CI_TIME make VERBOSE=1 clang-format-diff || RES=$?
+            }
+            exit $RES
+            ;;
+    esac
     $CI_TIME make VERBOSE=1 all
 
     echo "=== Are GitIgnores good after 'make all' with drafts?"
