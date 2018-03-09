@@ -10,6 +10,7 @@ libfty_prometheus_rest.pc
 
 # + config files for mains (if any):
 
+### Note: Custom addition:
 # ecpp products
 metrics.cc
 

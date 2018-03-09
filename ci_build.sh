@@ -37,10 +37,11 @@ default|default-Werror|default-with-docs|valgrind|clang-format-check)
     mkdir -p tmp
     BUILD_PREFIX=$PWD/tmp
 
-    PATH="`echo "$PATH" | sed -e 's,^/usr/lib/ccache/?:,,' -e 's,:/usr/lib/ccache/?:,,' -e 's,:/usr/lib/ccache/?$,,' -e 's,^/usr/lib/ccache/?$,,'2`"
+    PATH="`echo "$PATH" | sed -e 's,^/usr/lib/ccache/?:,,' -e 's,:/usr/lib/ccache/?:,,' -e 's,:/usr/lib/ccache/?$,,' -e 's,^/usr/lib/ccache/?$,,'`"
     CCACHE_PATH="$PATH"
     CCACHE_DIR="${HOME}/.ccache"
-    PATH="${BUILD_PREFIX}/sbin:${BUILD_PREFIX}/bin:$PATH"
+    # Use tools from prerequisites we might have built
+    PATH="${BUILD_PREFIX}/sbin:${BUILD_PREFIX}/bin:${PATH}"
     export CCACHE_PATH CCACHE_DIR PATH
     HAVE_CCACHE=no
     if which ccache && ls -la /usr/lib/ccache ; then
@@ -428,14 +429,8 @@ default|default-Werror|default-with-docs|valgrind|clang-format-check)
             exit $?
             ;;
         clang-format-check)
-            RES=0
-            $CI_TIME make VERBOSE=1 clang-format-check || {
-                RES=$?
-                echo "" >&2
-                echo "Style mismatches were found by clang-format; detailing below:" >&2
-                $CI_TIME make VERBOSE=1 clang-format-diff || RES=$?
-            }
-            exit $RES
+            $CI_TIME make VERBOSE=1 clang-format-check-CI
+            exit $?
             ;;
     esac
     $CI_TIME make VERBOSE=1 all
