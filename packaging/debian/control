@@ -1,7 +1,7 @@
 #
 #    fty-prometheus-rest - REST API for prometheus collector
 #
-#    Copyright (C) 2014 - 2018 Eaton
+#    Copyright (C) 2017 - 2018 Eaton
 #
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 Source:         fty-prometheus-rest
 Section:        net
 Priority:       optional
-Maintainer:     fty-prometheus-rest Developers <geraldguillaume@gmail.com>
+Maintainer:     fty-prometheus-rest Developers <eatonipcopensource@eaton.com>
 Standards-Version: 4.0.1.0
 Build-Depends: debhelper (>= 9),
     pkg-config,

@@ -1,18 +1,18 @@
+# Custom targets, not managed via zproject
+
 ECPPC=ecppc
 ECPPFLAGS=
 ECPPFLAGS_CPP=
 
 ECPPFILES= \
-  metrics.ecpp 
+  metrics.ecpp
 
 TNTLIB_BASENAME=libfty_prometheus_rest
 TNTLIB_DIRNAME=$(prefix)/lib/bios
 
 ECPPCCFILES = $(ECPPFILES:.ecpp=.cc)
 
-EXTRA_DIST += $(addprefix src/,$(ECPPFILES))
-
-project_libs += -ltntnet
+EXTRA_DIST += $(addprefix $(top_srcdir)/src/,$(ECPPFILES))
 
 .ecpp.cc:
 	${ECPPC} ${ECPPFLAGS} ${ECPPFLAGS_CPP} -o $(top_builddir)/src/$(@F) $(top_srcdir)/src/$(<F) && \

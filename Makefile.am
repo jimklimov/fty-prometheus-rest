@@ -26,7 +26,10 @@ AM_CPPFLAGS = \
 project_libs = ${libsodium_LIBS} ${libzmq_LIBS} ${czmq_LIBS} ${malamute_LIBS} ${cxxtools_LIBS} ${tntnet_LIBS} ${fty_proto_LIBS}
 
 SUBDIRS = doc
+SUBDIRS += include
 DIST_SUBDIRS = doc
+DIST_SUBDIRS += include
+
 lib_LTLIBRARIES =
 bin_PROGRAMS =
 noinst_PROGRAMS =
@@ -54,6 +57,7 @@ endif
 EXTRA_DIST += \
     src/tntmlm.h \
     src/metrics.h \
+    README.md \
     src/fty_prometheus_rest_classes.h
 
 # NOTE: this "include" syntax is not a "make" but an "autotools" keyword,

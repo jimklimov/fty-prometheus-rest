@@ -1,7 +1,7 @@
 /*  =========================================================================
     fty-prometheus-rest - generated layer of public API
 
-    Copyright (C) 2014 - 2018 Eaton
+    Copyright (C) 2017 - 2018 Eaton
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -94,9 +94,18 @@ typedef struct _ftyprometheusrest_t ftyprometheusrest_t;
 #endif // FTY_PROMETHEUS_REST_BUILD_DRAFT_API
 
 #ifdef FTY_PROMETHEUS_REST_BUILD_DRAFT_API
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 //  Self test for private classes
 FTY_PROMETHEUS_REST_EXPORT void
-    fty_prometheus_rest_private_selftest (bool verbose);
+    fty_prometheus_rest_private_selftest (bool verbose, const char *subtest);
+
+#ifdef __cplusplus
+}
+#endif
 #endif // FTY_PROMETHEUS_REST_BUILD_DRAFT_API
 
 #endif

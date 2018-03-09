@@ -4,7 +4,7 @@
     Runs all private classes selftests.
 
     -------------------------------------------------------------------------
-    Copyright (C) 2014 - 2018 Eaton
+    Copyright (C) 2017 - 2018 Eaton
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -35,10 +35,11 @@
 //
 
 void
-fty_prometheus_rest_private_selftest (bool verbose)
+fty_prometheus_rest_private_selftest (bool verbose, const char *subtest)
 {
 // Tests for stable private classes:
-    tntmlm_test (verbose);
+    if (streq (subtest, "$ALL") || streq (subtest, "tntmlm_test"))
+        tntmlm_test (verbose);
 }
 /*
 ################################################################################

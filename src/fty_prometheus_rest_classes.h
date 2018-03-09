@@ -1,7 +1,7 @@
 /*  =========================================================================
     fty_prometheus_rest_classes - private header file
 
-    Copyright (C) 2014 - 2018 Eaton
+    Copyright (C) 2017 - 2018 Eaton
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -59,7 +59,7 @@ FTY_PROMETHEUS_REST_PRIVATE void
 
 //  Self test for private classes
 FTY_PROMETHEUS_REST_PRIVATE void
-    fty_prometheus_rest_private_selftest (bool verbose);
+    fty_prometheus_rest_private_selftest (bool verbose, const char *subtest);
 
 #endif // FTY_PROMETHEUS_REST_BUILD_DRAFT_API
 
