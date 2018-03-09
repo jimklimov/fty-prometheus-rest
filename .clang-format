@@ -9,10 +9,10 @@ BraceWrapping:
     AfterFunction: true
     AfterNamespace: true
     AfterObjCDeclaration: true
-    AfterStruct: true
+    AfterStruct: false
     AfterUnion: true
     BeforeCatch: true
-    BeforeElse: false
+    BeforeElse: true
     IndentBraces: false
 
 AlignConsecutiveAssignments: false
@@ -52,3 +52,4 @@ ConstructorInitializerAllOnOneLineOrOnePerLine: true
 SpaceAfterCStyleCast: true
 BreakBeforeTernaryOperators: true
 AlwaysBreakAfterReturnType: All
+IndentWrappedFunctionNames: true
