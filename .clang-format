@@ -29,7 +29,7 @@ AlwaysBreakTemplateDeclarations: false
 ColumnLimit: 80
 MaxEmptyLinesToKeep: 2
 KeepEmptyLinesAtTheStartOfBlocks: false
-ContinuationIndentWidth: 2
+ContinuationIndentWidth: 4
 PointerAlignment: Right
 ReflowComments: false
 SpaceBeforeAssignmentOperators: true
@@ -53,3 +53,4 @@ SpaceAfterCStyleCast: true
 BreakBeforeTernaryOperators: true
 AlwaysBreakAfterReturnType: All
 IndentWrappedFunctionNames: true
+PointerBindsToType: true
