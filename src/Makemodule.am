@@ -239,6 +239,10 @@ ALL_SOURCE_FILES = $(wildcard \
 
 # Check if any sources need to be fixed, report the filenames and an error code
 clang-format-check: $(ALL_SOURCE_FILES)
+	@if test -z "$(CLANG_FORMAT)" ; then \
+		echo "FAILURE: CLANG_FORMAT program was not specified or found" >&2 ; \
+		exit 1 ; \
+	fi
 	@FAILED=0 ; IFS=";" ; IDS="`printf '\n\b'`" ; export IFS IDS; \
 	 for FILE in $(ALL_SOURCE_FILES) ; do \
 		test -s $$FILE || continue ; \
@@ -251,6 +255,10 @@ clang-format-check: $(ALL_SOURCE_FILES)
 
 # Change source formatting
 clang-format: $(ALL_SOURCE_FILES)
+	@if test -z "$(CLANG_FORMAT)" ; then \
+		echo "FAILURE: CLANG_FORMAT program was not specified or found" >&2 ; \
+		exit 1 ; \
+	fi
 	$(CLANG_FORMAT) -style=file -i $(ALL_SOURCE_FILES)
 
 # Change source formatting AND report the diff
