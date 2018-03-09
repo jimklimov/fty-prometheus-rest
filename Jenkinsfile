@@ -101,8 +101,8 @@ pipeline {
             description: 'Require that if clang-format is executed, that it must show no differences in codebase?',
             name: 'CI_REQUIRE_GOOD_CLANG_FORMAT')
         string (
-            defaultValue: "clang-format-5.0",
-            description: 'The clang-format program (v5+) to use for this build, e.g. clang-format-5.0',
+            defaultValue: "",
+            description: 'The clang-format program (v5+) to use for this build, e.g. clang-format-5.0; an empty value means configure-time guesswork',
             name: 'CLANG_FORMAT')
         string (
             defaultValue: "10",
