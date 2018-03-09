@@ -274,8 +274,10 @@ clang-format-check-CI:
 	   echo "SUCCESS : Style checks have passed" >&2 ; \
 	else \
 	   echo "" >&2 ; \
-	   echo "Style mismatches were found by clang-format; detailing below:" >&2 ; \
-	   $(MAKE) VERBOSE=1 clang-format-diff ; \
+	   if test -n "$(CLANG_FORMAT)" ; then \
+	     echo "Style mismatches were found by clang-format; detailing below:" >&2 ; \
+	     $(MAKE) VERBOSE=1 clang-format-diff ; \
+	   fi ; \
 	   if test x"$(CI_REQUIRE_GOOD_CLANG_FORMAT)" = xtrue ; then \
 	     echo "FAILED : Style checks have failed and CI_REQUIRE_GOOD_CLANG_FORMAT==true" >&2 ; \
 	     exit 1 ; \

@@ -97,8 +97,8 @@ pipeline {
             description: 'Attempt "clang-format" (v5+) analysis before this run? (Note: corresponding tools are required in the build environment)',
             name: 'DO_CHECK_CLANG_FORMAT')
         booleanParam (
-            defaultValue: true,
-            description: 'Require that if clang-format is executed, that it must show no differences in codebase?',
+            defaultValue: false,
+            description: 'Require that if clang-format is executed, then it must show no differences in codebase?',
             name: 'CI_REQUIRE_GOOD_CLANG_FORMAT')
         string (
             defaultValue: "",
