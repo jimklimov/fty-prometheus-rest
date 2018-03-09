@@ -2,7 +2,7 @@ Format: 3.0 (quilt)
 Binary: fty-prometheus-rest
 Source: fty-prometheus-rest
 Version: 1.0.0
-Maintainer: fty-prometheus-rest Developers <geraldguillaume@gmail.com>
+Maintainer: fty-prometheus-rest Developers <eatonipcopensource@eaton.com>
 Architecture: any
 Build-Depends: debhelper (>= 9),
     pkg-config,

@@ -7,7 +7,7 @@
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
 #
-AC_INIT([fty-prometheus-rest],[1.0.0],[geraldguillaume@gmail.com])
+AC_INIT([fty-prometheus-rest],[1.0.0],[eatonipcopensource@eaton.com])
 
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_MACRO_DIR(config)
@@ -991,6 +991,7 @@ AS_IF([test "x$enable_Werror" = "xyes" || test "x$enable_Werror" = "xauto"],
 # Specify output files
 AC_CONFIG_FILES([Makefile
                  doc/Makefile
+                 include/Makefile
                  src/libfty_prometheus_rest.pc
                  ])
 

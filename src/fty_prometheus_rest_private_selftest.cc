@@ -35,10 +35,11 @@
 //
 
 void
-fty_prometheus_rest_private_selftest (bool verbose)
+fty_prometheus_rest_private_selftest (bool verbose, const char *subtest)
 {
 // Tests for stable private classes:
-    tntmlm_test (verbose);
+    if (streq (subtest, "$ALL") || streq (subtest, "tntmlm_test"))
+        tntmlm_test (verbose);
 }
 /*
 ################################################################################
