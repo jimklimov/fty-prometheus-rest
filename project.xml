@@ -2,10 +2,10 @@
     name = "fty-prometheus-rest"
     description = "REST API for prometheus collector"
     script = "zproject.gsl"
-    email = "geraldguillaume@gmail.com"
+    email = "EatonIPCOpenSource@eaton.com"
     url = "https://42ity.org"
     license = "GPL-2.0+"
-    repository = "https://github.com/geraldguillaume/fty-prometheus-rest"
+    repository = "https://github.com/42ity/fty-prometheus-rest"
     >
 
     <target name = "debian" />
@@ -15,6 +15,7 @@
         <option name = "triggers_pollSCM" value = "H/2 * * * *" />
         <option name = "test_cppcheck" value = "1" />
         <option name = "build_docs" value = "1" />
+        <option name = "dist_docs" value = "1" />
     </target>
 
     <include filename = "license.xml" />
