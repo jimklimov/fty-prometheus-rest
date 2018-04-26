@@ -3,7 +3,7 @@
 #
 #>
 <%pre>
-#include "tntmlm.h"
+#include "src/tntmlm.h"
 #include <fty_proto.h>
 
 //out <label>{device="<device-id>"} <value>
