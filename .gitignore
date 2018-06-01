@@ -71,7 +71,8 @@ DartConfiguration.tcl
 install_manifest.txt
 Testing/
 
-# no CMake at all
+
+# CMake in general
 builds/cmake/
 CMake*
 *.cmake
