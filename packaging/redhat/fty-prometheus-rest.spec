@@ -103,7 +103,7 @@ This package contains development files for fty-prometheus-rest: rest api for pr
 
 %build
 sh autogen.sh
-%{configure} --enable-drafts=%{DRAFTS} --with-tntnet=yes
+%{configure} --enable-drafts=%{DRAFTS}
 make %{_smp_mflags}
 
 %install
