@@ -33,9 +33,7 @@
 #include <czmq.h>
 #include <malamute.h>
 #include <cxxtools/allocator.h>
-#if defined (HAVE_TNTNET)
-#include <tntnet.h>
-#endif
+#include <tnt/tntnet.h>
 #include <ftyproto.h>
 
 //  FTY_PROMETHEUS_REST version macros for compile-time API detection
@@ -67,11 +65,12 @@
 #   define FTY_PROMETHEUS_REST_EXPORT
 #   define FTY_PROMETHEUS_REST_PRIVATE
 #else
-#   define FTY_PROMETHEUS_REST_EXPORT
 #   if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER
 #       define FTY_PROMETHEUS_REST_PRIVATE __attribute__ ((visibility ("hidden")))
+#       define FTY_PROMETHEUS_REST_EXPORT __attribute__ ((visibility ("default")))
 #   else
 #       define FTY_PROMETHEUS_REST_PRIVATE
+#       define FTY_PROMETHEUS_REST_EXPORT
 #   endif
 #endif
 

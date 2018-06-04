@@ -1,3 +1,6 @@
+# This is a skeleton created by zproject.
+# You can add hand-written code here.
+
 BasedOnStyle: LLVM
 IndentWidth: 4
 UseTab: Never

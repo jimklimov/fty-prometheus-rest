@@ -366,9 +366,6 @@ default|default-Werror|default-with-docs|valgrind|clang-format-check)
         $CI_TIME make -j4
         $CI_TIME make install
         cd "${BASE_PWD}"
-        CONFIG_OPTS+=("--with-tntnet=yes")
-    else
-        CONFIG_OPTS+=("--with-tntnet=yes")
     fi
 
     # Start of recipe for dependency: fty-proto
