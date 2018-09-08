@@ -47,6 +47,8 @@ BuildRequires:  libtool
 BuildRequires:  pkgconfig
 BuildRequires:  xmlto
 BuildRequires:  gcc-c++
+BuildRequires:  log4cplus-devel
+BuildRequires:  fty-common-logging-devel
 BuildRequires:  libsodium-devel
 BuildRequires:  zeromq-devel
 BuildRequires:  czmq-devel
@@ -77,6 +79,8 @@ This package contains shared library for fty-prometheus-rest: rest api for prome
 Summary:        rest api for prometheus collector
 Group:          System/Libraries
 Requires:       libfty_prometheus_rest1 = %{version}
+Requires:       log4cplus-devel
+Requires:       fty-common-logging-devel
 Requires:       libsodium-devel
 Requires:       zeromq-devel
 Requires:       czmq-devel

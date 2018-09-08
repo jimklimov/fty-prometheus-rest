@@ -24,6 +24,8 @@ Maintainer:     fty-prometheus-rest Developers <eatonipcopensource@eaton.com>
 Standards-Version: 4.0.1.0
 Build-Depends: debhelper (>= 9),
     pkg-config,
+    liblog4cplus-dev,
+    libfty-common-logging-dev,
     libsodium-dev,
     libzmq3-dev,
     libczmq-dev,
@@ -46,6 +48,8 @@ Architecture: any
 Section: libdevel
 Depends:
     ${misc:Depends},
+    liblog4cplus-dev,
+    libfty-common-logging-dev,
     libsodium-dev,
     libzmq3-dev,
     libczmq-dev,
@@ -57,7 +61,6 @@ Depends:
 Description: fty-prometheus-rest development tools
  This package contains development files for fty-prometheus-rest:
  rest api for prometheus collector
-
 
 Package: fty-prometheus-rest-dbg
 Architecture: any
