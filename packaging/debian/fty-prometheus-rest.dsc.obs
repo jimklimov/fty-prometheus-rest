@@ -6,14 +6,14 @@ Maintainer: fty-prometheus-rest Developers <eatonipcopensource@eaton.com>
 Architecture: any
 Build-Depends: debhelper (>= 9),
     pkg-config,
-    liblog4cplus-dev,
-    libfty-common-logging-dev,
     libsodium-dev,
     libzmq3-dev,
     libczmq-dev,
     libmlm-dev,
     libcxxtools-dev,
     libtntnet-dev,
+    liblog4cplus-dev,
+    libfty-common-logging-dev,
     libfty-proto-dev,
     asciidoc-base | asciidoc, xmlto,
     dh-autoreconf

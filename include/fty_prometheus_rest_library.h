@@ -30,11 +30,11 @@
 //  Set up environment for the application
 
 //  External dependencies
-#include <fty_log.h>
 #include <czmq.h>
 #include <malamute.h>
 #include <cxxtools/allocator.h>
 #include <tnt/tntnet.h>
+#include <fty_log.h>
 #include <ftyproto.h>
 
 //  FTY_PROMETHEUS_REST version macros for compile-time API detection

@@ -24,14 +24,14 @@ Maintainer:     fty-prometheus-rest Developers <eatonipcopensource@eaton.com>
 Standards-Version: 4.0.1.0
 Build-Depends: debhelper (>= 9),
     pkg-config,
-    liblog4cplus-dev,
-    libfty-common-logging-dev,
     libsodium-dev,
     libzmq3-dev,
     libczmq-dev,
     libmlm-dev,
     libcxxtools-dev,
     libtntnet-dev,
+    liblog4cplus-dev,
+    libfty-common-logging-dev,
     libfty-proto-dev,
     asciidoc-base | asciidoc, xmlto,
     dh-autoreconf
@@ -48,14 +48,14 @@ Architecture: any
 Section: libdevel
 Depends:
     ${misc:Depends},
-    liblog4cplus-dev,
-    libfty-common-logging-dev,
     libsodium-dev,
     libzmq3-dev,
     libczmq-dev,
     libmlm-dev,
     libcxxtools-dev,
     libtntnet-dev,
+    liblog4cplus-dev,
+    libfty-common-logging-dev,
     libfty-proto-dev,
     libfty-prometheus-rest1 (= ${binary:Version})
 Description: fty-prometheus-rest development tools
