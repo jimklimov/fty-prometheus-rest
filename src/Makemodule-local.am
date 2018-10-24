@@ -1,7 +1,7 @@
 # Custom targets, not managed via zproject
 
 ECPPC=ecppc
-ECPPFLAGS=
+ECPPFLAGS = --nolog
 ECPPFLAGS_CPP=
 
 ECPPFILES= \
