@@ -1,8 +1,28 @@
 <#
-#Copyright (C) 2018 Eaton.
-#
-#>
-<%pre>
+ #
+ # Copyright (C) 2018 Eaton
+ #
+ # This program is free software; you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation; either version 2 of the License, or
+ # (at your option) any later version.
+ #
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License along
+ # with this program; if not, write to the Free Software Foundation, Inc.,
+ # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ #
+ #><#
+/*!
+ * \file metrics.ecpp
+ * \author Gerald Guillaume <GeraldGuillaume@Eaton.com>
+ * \brief Implementation of metrics operations
+ */
+ #><%pre>
 #include "src/tntmlm.h"
 #include <fty_proto.h>
 
@@ -18,7 +38,7 @@ void s_rt_dump_metrics(const char*label, const char* name, const char*filter,Mlm
     zmsg_addstr (msg, name);
     if(filter!=NULL)
         zmsg_addstr (msg, filter);
-    
+
     int rv = client->sendto ("fty-metric-cache", "latest-rt-data", 1000, &msg);
     if (rv == -1) {
         zuuid_destroy (&uuid);
@@ -90,17 +110,17 @@ void s_rt_dump_metrics(const char*label, const char* name, const char*filter,Mlm
         return HTTP_INTERNAL_SERVER_ERROR;
     }
 </%cpp>
-# HELP ipm_realpower_watt current realpower 
+# HELP ipm_realpower_watt current realpower
 # TYPE ipm_realpower_watt gauge
 <%cpp>
    s_rt_dump_metrics("ipm_realpower_watt",".*","realpower.default$",client,reply);
 </%cpp>
-# HELP ipm_temperature_celsius current ambiant temperature 
+# HELP ipm_temperature_celsius current ambient temperature
 # TYPE ipm_temperature_celsius gauge
 <%cpp>
    s_rt_dump_metrics("ipm_temperature_celsius",".*","average.temperature$|average.temperature-input$|temperature.cpu$",client,reply);
 </%cpp>
-# HELP ipm_humidity_percent current ambiant temperature 
+# HELP ipm_humidity_percent current ambient temperature
 # TYPE ipm_humidity_percent gauge
 <%cpp>
    s_rt_dump_metrics("ipm_humidity_percent",".*","average.humidity$|average.humidity-input$",client,reply);

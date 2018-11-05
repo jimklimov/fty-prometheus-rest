@@ -1,5 +1,6 @@
 #
 #    fty-prometheus-rest - REST API for prometheus collector
+#    NOTE: This file was customized after generation, be sure to keep it
 #
 #    Copyright (C) 2017 - 2018 Eaton
 #
@@ -71,9 +72,11 @@ This package contains shared library for fty-prometheus-rest: rest api for prome
 %post -n libfty_prometheus_rest1 -p /sbin/ldconfig
 %postun -n libfty_prometheus_rest1 -p /sbin/ldconfig
 
+# Note: the .so file is delivered as part of main package for tntnet to find it
 %files -n libfty_prometheus_rest1
 %defattr(-,root,root)
 %{_libdir}/libfty_prometheus_rest.so.*
+%{_libdir}/libfty_prometheus_rest.so
 
 %package devel
 Summary:        rest api for prometheus collector
@@ -93,10 +96,11 @@ Requires:       fty-proto-devel
 rest api for prometheus collector development tools
 This package contains development files for fty-prometheus-rest: rest api for prometheus collector
 
+# Note: the .so file is delivered as part of main package for tntnet to find it
 %files devel
 %defattr(-,root,root)
 %{_includedir}/*
-%{_libdir}/libfty_prometheus_rest.so
+###%{_libdir}/libfty_prometheus_rest.so
 %{_libdir}/pkgconfig/libfty_prometheus_rest.pc
 %{_mandir}/man3/*
 %{_mandir}/man7/*

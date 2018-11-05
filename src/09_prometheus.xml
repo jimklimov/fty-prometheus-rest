@@ -1,5 +1,5 @@
     <mapping>
-      <target>metrics@libfty_prometheus_rest.so.1</target>
+      <target>metrics@libfty_prometheus_rest</target>
       <method>GET</method>
       <url>^/metrics/?$</url>
     </mapping>

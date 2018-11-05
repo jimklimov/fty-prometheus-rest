@@ -1,7 +1,7 @@
 # Custom targets, not managed via zproject
 
 ECPPC=ecppc
-ECPPFLAGS=
+ECPPFLAGS = --nolog
 ECPPFLAGS_CPP=
 
 ECPPFILES= \
@@ -13,6 +13,8 @@ TNTLIB_DIRNAME=$(prefix)/lib/bios
 ECPPCCFILES = $(ECPPFILES:.ecpp=.cc)
 
 EXTRA_DIST += $(addprefix $(top_srcdir)/src/,$(ECPPFILES))
+
+project_libs += -ltntnet
 
 .ecpp.cc:
 	${ECPPC} ${ECPPFLAGS} ${ECPPFLAGS_CPP} -o $(top_builddir)/src/$(@F) $(top_srcdir)/src/$(<F) && \
@@ -31,4 +33,3 @@ install-exec-hook:
 	    mv -f $(DESTDIR)$(libdir)/$(TNTLIB_BASENAME).so.* $(DESTDIR)$(TNTLIB_DIRNAME)
 	cd $(DESTDIR)$(TNTLIB_DIRNAME) && \
 	    ln -fs "`ls -1 $(TNTLIB_BASENAME).so.* | tail -1`" $(TNTLIB_BASENAME).so
-
