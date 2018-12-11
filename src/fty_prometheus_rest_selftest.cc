@@ -39,10 +39,8 @@ typedef struct {
 
 static test_item_t
 all_tests [] = {
-#ifdef FTY_PROMETHEUS_REST_BUILD_DRAFT_API
-// Tests for draft public classes:
-    { "ftyprometheusrest", ftyprometheusrest_test, false, true, NULL },
-#endif // FTY_PROMETHEUS_REST_BUILD_DRAFT_API
+// Tests for stable public classes:
+    { "ftyprometheusrest", ftyprometheusrest_test, true, true, NULL },
 #ifdef FTY_PROMETHEUS_REST_BUILD_DRAFT_API
 // Tests for stable/draft private classes:
 // Now built only with --enable-drafts, so even stable builds are hidden behind the flag

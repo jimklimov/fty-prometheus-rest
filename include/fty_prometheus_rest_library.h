@@ -75,23 +75,14 @@
 #   endif
 #endif
 
-//  Project has no stable classes, so we build the draft API
-#undef  FTY_PROMETHEUS_REST_BUILD_DRAFT_API
-#define FTY_PROMETHEUS_REST_BUILD_DRAFT_API
-
 //  Opaque class structures to allow forward references
 //  These classes are stable or legacy and built in all releases
-//  Draft classes are by default not built in stable releases
-#ifdef FTY_PROMETHEUS_REST_BUILD_DRAFT_API
 typedef struct _ftyprometheusrest_t ftyprometheusrest_t;
 #define FTYPROMETHEUSREST_T_DEFINED
-#endif // FTY_PROMETHEUS_REST_BUILD_DRAFT_API
 
 
 //  Public classes, each with its own header file
-#ifdef FTY_PROMETHEUS_REST_BUILD_DRAFT_API
 #include "ftyprometheusrest.h"
-#endif // FTY_PROMETHEUS_REST_BUILD_DRAFT_API
 
 #ifdef FTY_PROMETHEUS_REST_BUILD_DRAFT_API
 
