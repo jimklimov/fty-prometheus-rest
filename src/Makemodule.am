@@ -15,13 +15,8 @@ pkgconfig_DATA = src/libfty_prometheus_rest.pc
 src_libfty_prometheus_rest_la_SOURCES = \
     src/tntmlm.cc \
     src/metrics.cc \
+    src/ftyprometheusrest.cc \
     src/platform.h
-
-if ENABLE_DRAFTS
-src_libfty_prometheus_rest_la_SOURCES += \
-    src/ftyprometheusrest.cc
-
-endif
 
 if ENABLE_DRAFTS
 src_libfty_prometheus_rest_la_SOURCES += \

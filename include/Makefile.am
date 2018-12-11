@@ -4,13 +4,9 @@
 ################################################################################
 include_HEADERS = \
     fty_prometheus_rest.h \
+    ftyprometheusrest.h \
     fty_prometheus_rest_library.h
 
-if ENABLE_DRAFTS
-include_HEADERS += \
-    ftyprometheusrest.h
-
-endif
 
 
 ################################################################################
